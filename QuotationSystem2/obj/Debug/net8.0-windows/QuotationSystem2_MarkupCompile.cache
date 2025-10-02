@@ -1,0 +1,20 @@
+﻿QuotationSystem2
+
+
+winexe
+C#
+.cs
+C:\Users\user\Desktop\UCL\Gap Year\WPF\QuotationSystem2\QuotationSystem2\obj\Debug\net8.0-windows\
+QuotationSystem2
+none
+false
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+C:\Users\user\Desktop\UCL\Gap Year\WPF\QuotationSystem2\QuotationSystem2\App.xaml
+171788896410
+
+1251965829203
+262127081492
+PresentationLayer\ChangePasswordWindow.xaml;PresentationLayer\ErrorWindow.xaml;PresentationLayer\MainWindow.xaml;PresentationLayer\Templates\QuotationViewTemplate.xaml;PresentationLayer\Utilities\DataTemplate.xaml;PresentationLayer\Views\AccountView.xaml;PresentationLayer\Views\CreateOrEditUserWindow.xaml;PresentationLayer\Views\HomeView.xaml;PresentationLayer\Views\LoginView.xaml;PresentationLayer\Views\PriceTableView.xaml;PresentationLayer\Views\SealingPlateQuotationView.xaml;PresentationLayer\Views\SheerStudQuotationView.xaml;PresentationLayer\Views\WaterMeterQuotationView.xaml;PresentationLayer\Views\WaterMeterTeethPopup.xaml;Resources\Style\Button.xaml;Resources\Style\ScrollViewer.xaml;Resources\Style\Text.xaml;
+
+False
+

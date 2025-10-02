@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:QuotationSystem2.PresentationLayer.ViewModels"
+                    xmlns:view="clr-namespace:QuotationSystem2.PresentationLayer.Views">
+
+    <DataTemplate DataType="{x:Type vm:HomeVM}">
+        <view:HomeView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:LoginVM}">
+        <view:LoginView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:WaterMeterQuotationVM}">
+        <view:WaterMeterQuotationView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SheerStudQuotationVM}">
+        <view:SheerStudQuotationView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SealingPlateQuotationVM}">
+        <view:SealingPlateQuotationView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:AccountVM}">
+        <view:AccountView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:PriceTableVM}">
+        <view:PriceTableView/>
+    </DataTemplate>
+
+</ResourceDictionary>

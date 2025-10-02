@@ -1,0 +1,196 @@
+﻿<UserControl x:Class="QuotationSystem2.PresentationLayer.Views.AccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:QuotationSystem2.PresentationLayer.Views"
+             xmlns:loc="clr-namespace:QuotationSystem2.PresentationLayer.Services.Localization"
+             mc:Ignorable="d">
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
+                  Style="{StaticResource ScrollViewerStyle}">
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    Margin="30"
+                    Width="800">
+            <!-- Title -->
+            <TextBlock Text="{loc:Loc Key=AccountManagement, ForceStatic=True}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       FontSize="40"
+                       FontWeight="Black" />
+            <Border Height="1"
+                    Background="Gray"
+                    Margin="0,40,0,40"
+                    HorizontalAlignment="Stretch" />
+
+            <!-- User Info -->
+            <StackPanel Orientation="Vertical"
+                        Margin="50,0,50,0"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="{loc:Loc Key=Account|Information, ForceStatic=True}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           FontSize="30"
+                           FontWeight="Black" />
+                <Grid HorizontalAlignment="Left"
+                      Margin="0,30,0,35">
+                    <Grid.RowDefinitions>
+                        <!-- Name/Account/Identity -->
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <!-- title/:/content -->
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Name Row -->
+                    <TextBlock Text="{loc:Loc Key=Name, ForceStatic=True}"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               FontSize="18"
+                               VerticalAlignment="Center" />
+                    <TextBlock Text=":"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               FontSize="18"
+                               VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding User.Name}"
+                               Grid.Column="2"
+                               Grid.Row="0"
+                               FontSize="18"
+                               Width="200"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left" />
+                    <!-- Account Row -->
+                    <TextBlock Text="{loc:Loc Key=Account, ForceStatic=True}"
+                               Grid.Column="0"
+                               Grid.Row="2"
+                               FontSize="18"
+                               VerticalAlignment="Center" />
+                    <TextBlock Text=":"
+                               Grid.Column="1"
+                               Grid.Row="2"
+                               FontSize="18"
+                               VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding User.Account}"
+                               Grid.Column="2"
+                               Grid.Row="2"
+                               FontSize="18"
+                               Width="200"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left" />
+                    <!-- Identity Row -->
+                    <TextBlock Text="{loc:Loc Key=Identity, ForceStatic=True}"
+                               Grid.Row="4"
+                               Grid.Column="0"
+                               FontSize="18"
+                               VerticalAlignment="Center" />
+                    <TextBlock Text=" :"
+                               Grid.Column="1"
+                               Grid.Row="4"
+                               FontSize="18"
+                               VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding User.Role.DisplayNames, Converter={StaticResource TranslationDtoConverter}}"
+                               Grid.Column="2"
+                               Grid.Row="4"
+                               FontSize="18"
+                               Width="200"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left">
+                    </TextBlock>
+                </Grid>
+                <!-- Change Password Btn -->
+                <StackPanel Height="30"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Content="{loc:Loc Key=Change|Password, ForceStatic=True}"
+                            MinWidth="90"
+                            Margin="0,0,20,0"
+                            Command="{Binding ChangePasswordCommand}" />
+                    <Button Content="{loc:Loc Key=Logout}"
+                            MinWidth="90" />
+                </StackPanel>
+            </StackPanel>
+            <Border Height="70" />
+
+            <!-- Employee List -->
+            <StackPanel Orientation="Vertical"
+                        Visibility="{Binding IsVisible}"
+                        Margin="50,0,50,0"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="{loc:Loc Key=User|List, ForceStatic=True}"
+                           FontSize="30"
+                           FontWeight="Black"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top" />
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,30,0,0">
+
+                    <DataGrid ItemsSource="{Binding UserList}"
+                              AutoGenerateColumns="False"
+                              Margin="0,0,0,0"
+                              EnableRowVirtualization="False"
+                              EnableColumnVirtualization="False"
+                              Width="600"
+                              MaxHeight="800">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="{loc:Loc Key=Name, ForceStatic=True}"
+                                                Binding="{Binding Name}"
+                                                Width="*"
+                                                IsReadOnly="True" />
+                            <DataGridTextColumn Header="{loc:Loc Key=Account, ForceStatic=True}"
+                                                Binding="{Binding Account}"
+                                                Width="*"
+                                                IsReadOnly="True" />
+                            <DataGridTextColumn Header="{loc:Loc Key=Identity, ForceStatic=True}"
+                                                Width="*"
+                                                IsReadOnly="True">
+                                <DataGridTextColumn.Binding>
+                                    <Binding Path="Role.DisplayNames"
+                                             Converter="{StaticResource TranslationDtoConverter}" />
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
+                            <DataGridTemplateColumn Header="✓"
+                                                    Width="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  HorizontalAlignment="Center" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Center"
+                                Margin="20,0,0,0">
+                        <Button Content="{loc:Loc Key=Create, ForceStatic=True}"
+                                Command="{Binding CreateUserCommand}"
+                                Width="80"
+                                Height="30"
+                                Margin="0,0,0,10" />
+                        <Button Content="{loc:Loc Key=Edit, ForceStatic=True}"
+                                Command="{Binding EditUserCommand}"
+                                Width="80"
+                                Height="30"
+                                Margin="0,0,0,10" />
+                        <Button Content="{loc:Loc Key=Delete, ForceStatic=True}"
+                                Command="{Binding DeleteSelectedUsersCommand}"
+                                Width="80"
+                                Height="30"
+                                Margin="0,0,0,10" />
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

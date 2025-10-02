@@ -1,0 +1,531 @@
+﻿<UserControl x:Class="QuotationSystem2.PresentationLayer.Views.WaterMeterQuotationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:QuotationSystem2.PresentationLayer.Views"
+             xmlns:temp="clr-namespace:QuotationSystem2.PresentationLayer.Templates"
+             xmlns:loc="clr-namespace:QuotationSystem2.PresentationLayer.Services.Localization"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d">
+
+    <Grid>
+        <temp:QuotationViewTemplate Title="{loc:Loc Key=WaterMeter|Quotation, ForceStatic=True}"
+                                    ExportSelectedRecord="{Binding ExportSelectedRecordsCommand}"
+                                    ExportAllRecord="{Binding ExportAllRecordsCommand}"
+                                    DeleteSelectedRecord="{Binding DeleteSelectedRecordsCommand}"
+                                    DeleteAllRecord="{Binding DeleteAllRecordsCommand}"
+                                    NextPage="{Binding NextPageCommand}"
+                                    PreviousPage="{Binding PreviousPageCommand}"
+                                    EditRecord="{Binding EditSelectedRecordCommand}"
+                                    SelectThisPage="{Binding SelectThisPageCommand}"
+                                    
+                                    EditRecordButtonVisibility="{Binding EditRecordButtonVisibility}"
+                                    DeleteRecordButtonVisibility="{Binding DeleteRecordButtonVisibility}"
+                                    ExportRecordButtonVisibility="{Binding ExportRecordButtonVisibility}"
+                                    SelectingCheckBoxVisibility="{Binding SelectingCheckBoxVisibility}"
+                                    PageCount ="{Binding PageCountText}">
+
+            <!-- Quotation Sheet -->
+            <temp:QuotationViewTemplate.Sheet>
+
+                <Grid ShowGridLines="True"
+                      HorizontalAlignment="Center"
+                      MinHeight="510"
+                      Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="{Binding SocketRowHeight, Mode=TwoWay}" />
+                        <!-- Socket：65 + (40) x:Name="SocketRowDefinition" -->
+                        <RowDefinition Height="{Binding NippleRowHeight, Mode=TwoWay}" />
+                        <!-- Nipple：65 + (40) x:Name="NippleRowDefinition" -->
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+                    <!-- Pipe -->
+                    <TextBlock Text="{loc:Loc Key=Pipe}"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Style="{StaticResource TopicTextBlockStyle}" />
+                    <DockPanel LastChildFill="False"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Center">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{loc:Loc Key=Diameter}"
+                                           Style="{StaticResource CommonTextBlockStyle}" />
+                                <ComboBox  ItemsSource="{Binding PipeDiameterList}"
+                                           SelectedItem="{Binding SelectedPipeDiameter, Mode=TwoWay}"
+                                           DisplayMemberPath="DisplayName"
+                                           Style="{StaticResource CommonBoxStyle}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0,15,0,0">
+                                <TextBlock Text="{loc:Loc Key=Thickness}"
+                                           Style="{StaticResource CommonTextBlockStyle}" />
+                                <ComboBox  ItemsSource="{Binding PipeThicknessList}"
+                                           SelectedItem="{Binding SelectedPipeThickness, Mode=TwoWay}"
+                                           DisplayMemberPath="DisplayName"
+                                           Style="{StaticResource CommonBoxStyle}"
+                                           IsEnabled="{Binding IsPipeThicknessEnabled}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{loc:Loc Key=UnitPrice}"
+                                           Style="{StaticResource CommonTextBlockStyle}" />
+                                <TextBox Text="{Binding PipeUnitPrice}"
+                                         Style="{StaticResource CommonBoxStyle}"
+                                         IsReadOnly="True" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0,15,0,0">
+                                <TextBlock Text="{loc:Loc Key=Discount}"
+                                           Style="{StaticResource CommonTextBlockStyle}" />
+                                <TextBlock Text="{Binding Product.PipeDiscount}"
+                                           Style="{StaticResource CommonBoxStyle}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <TextBlock Text="{loc:Loc Key=Length}"
+                                   Style="{StaticResource CommonTextBlockStyle}" />
+                        <TextBox Text="{Binding PipeLength, UpdateSourceTrigger=PropertyChanged}"
+                                 IsReadOnly="False"
+                                 Style="{StaticResource CommonInputControlStyle}" />
+                        <TextBox Text="{Binding PipePrice}"
+                                 Style="{StaticResource CommonBoxStyle}"
+                                 IsReadOnly="True"
+                                 DockPanel.Dock="Right"
+                                 Margin="20,0,40,0" />
+                        <TextBlock Text="{loc:Loc Key=Price}"
+                                   Style="{StaticResource CommonTextBlockStyle}"
+                                   DockPanel.Dock="Right" />
+                    </DockPanel>
+                    <!-- PipeTop -->
+                    <TextBlock Text="{loc:Loc Key=PipeTop}"
+                               Grid.Row="1"
+                               Grid.Column="0"
+                               Style="{StaticResource TopicTextBlockStyle}" />
+                    <DockPanel LastChildFill="False"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc Key=PipeTop}"
+                                   Style="{StaticResource CommonTextBlockStyle}" />
+                        <ComboBox  ItemsSource="{Binding PipeTopList}"
+                                   SelectedItem="{Binding SelectedPipeTop, Mode=TwoWay}"
+                                   Style="{StaticResource CommonBoxStyle}"
+                                   IsEnabled="{Binding IsPipeTopEnabled, Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayNames, Converter={StaticResource TranslationDtoConverter}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock Text="{Binding PipeTopUnitPriceText}"
+                                   Style="{StaticResource CommonTextBlockStyle}" />
+                        <TextBox Text="{Binding PipeTopUnitPrice, Mode=TwoWay}"
+                                 Style="{StaticResource CommonBoxStyle}"
+                                 IsReadOnly="True" />
+                        <TextBlock Text="{loc:Loc Key=Quantity}"
+                                   Style="{StaticResource CommonTextBlockStyle}"
+                                   Visibility="{Binding IsPipeTopQuantityVisible}" />
+                        <xctk:IntegerUpDown Value="{Binding PipeTopQuantity}"
+                                            Style="{StaticResource CommonInputControlStyle}"
+                                            Visibility="{Binding IsPipeTopQuantityVisible, Mode=TwoWay}"
+                                            Minimum="1" />
+                        <TextBox Text="{Binding PipeTopPrice}"
+                                 Style="{StaticResource CommonBoxStyle}"
+                                 IsReadOnly="True"
+                                 DockPanel.Dock="Right"
+                                 Margin="20,0,40,0" />
+                        <TextBlock Text="{loc:Loc Key=Price}"
+                                   Style="{StaticResource CommonTextBlockStyle}"
+                                   DockPanel.Dock="Right" />
+                    </DockPanel>
+                    <!-- Socket -->
+                    <StackPanel Grid.Row="2"
+                                Grid.Column="0"
+                                Orientation="Vertical"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc Key=Socket}"
+                                   Style="{StaticResource TopicTextBlockStyle}" />
+                        <!-- Button -->
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,5,0,0"
+                                    HorizontalAlignment="Center">
+                            <Button Content="+"
+                                    Width="20"
+                                    Height="15"
+                                    Command="{Binding AddSocketCommand}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2"
+                                Grid.Column="1"
+                                Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch">
+                        <ItemsControl ItemsSource="{Binding SocketInputs, Mode=TwoWay}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel LastChildFill="False"
+                                               Margin="0,5">
+                                        <TextBlock Text="{loc:Loc Key=Diameter}"
+                                                   Style="{StaticResource CommonTextBlockStyle}" />
+                                        <ComboBox ItemsSource="{Binding TeethDiameterList}"
+                                                  SelectedItem="{Binding SelectedTeethDiameter, Mode=TwoWay}"
+                                                  DisplayMemberPath="DisplayName"
+                                                  Style="{StaticResource CommonBoxStyle}" />
+
+                                        <TextBlock Text="{loc:Loc Key=UnitPrice}"
+                                                   Style="{StaticResource CommonTextBlockStyle}" />
+                                        <TextBox Text="{Binding TeethUnitPrice}"
+                                                 Style="{StaticResource CommonBoxStyle}"
+                                                 IsReadOnly="True" />
+
+                                        <TextBlock Text="{loc:Loc Key=Quantity}"
+                                                   Style="{StaticResource CommonTextBlockStyle}" />
+                                        <xctk:IntegerUpDown Value="{Binding TeethQuantity}"
+                                                            Style="{StaticResource CommonInputControlStyle}"
+                                                            Minimum="0" />
+                                        <Button Content="-"
+                                                Width="20"
+                                                Margin="20,0,0,0"
+                                                DockPanel.Dock="Right"
+                                                Command="{Binding DataContext.RemoveSocketCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}" />
+                                        <TextBox Text="{Binding TeethPrice}"
+                                                 Style="{StaticResource CommonBoxStyle}"
+                                                 IsReadOnly="True"
+                                                 DockPanel.Dock="Right" />
+                                        <TextBlock Text="{loc:Loc Key=Price}"
+                                                   Style="{StaticResource CommonTextBlockStyle}"
+                                                   DockPanel.Dock="Right" />
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <!-- Nipple -->
+                    <StackPanel Grid.Row="3"
+                                Grid.Column="0"
+                                Orientation="Vertical"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc Key=Nipple}"
+                                   Style="{StaticResource TopicTextBlockStyle}" />
+                        <!-- Button -->
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,5,0,0"
+                                    HorizontalAlignment="Center">
+                            <Button Content="+"
+                                    Width="20"
+                                    Height="15"
+                                    Command="{Binding AddNippleCommand}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3"
+                                Grid.Column="1"
+                                Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch">
+                        <ItemsControl ItemsSource="{Binding NippleInputs}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel LastChildFill="False"
+                                               Margin="0,5">
+                                        <TextBlock Text="{loc:Loc Key=Diameter}"
+                                                   Style="{StaticResource CommonTextBlockStyle}" />
+                                        <ComboBox ItemsSource="{Binding TeethDiameterList}"
+                                                  SelectedItem="{Binding SelectedTeethDiameter, Mode=TwoWay}"
+                                                  DisplayMemberPath="DisplayName"
+                                                  Style="{StaticResource CommonBoxStyle}" />
+
+                                        <TextBlock Text="{loc:Loc Key=UnitPrice}"
+                                                   Style="{StaticResource CommonTextBlockStyle}" />
+                                        <TextBox Text="{Binding TeethUnitPrice}"
+                                                 Style="{StaticResource CommonBoxStyle}"
+                                                 IsReadOnly="True" />
+
+                                        <TextBlock Text="{loc:Loc Key=Quantity}"
+                                                   Style="{StaticResource CommonTextBlockStyle}" />
+                                        <xctk:IntegerUpDown Value="{Binding TeethQuantity}"
+                                                            Style="{StaticResource CommonInputControlStyle}"
+                                                            Minimum="0" />
+                                        <Button Content="-"
+                                                Width="20"
+                                                Margin="20,0,0,0"
+                                                DockPanel.Dock="Right"
+                                                Command="{Binding DataContext.RemoveNippleCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}" />
+                                        <TextBox Text="{Binding TeethPrice}"
+                                                 Style="{StaticResource CommonBoxStyle}"
+                                                 IsReadOnly="True"
+                                                 DockPanel.Dock="Right" />
+                                        <TextBlock Text="{loc:Loc Key=Price}"
+                                                   Style="{StaticResource CommonTextBlockStyle}"
+                                                   DockPanel.Dock="Right" />
+
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                    <!-- End Plate -->
+                    <TextBlock Text="{loc:Loc Key=EndPlate}"
+                               Grid.Row="4"
+                               Grid.Column="0"
+                               Style="{StaticResource TopicTextBlockStyle}" />
+                    <DockPanel LastChildFill="False"
+                               Grid.Row="4"
+                               Grid.Column="1"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Center">
+                        <CheckBox VerticalAlignment="Center"
+                                  Margin="40,0,0,0"
+                                  IsEnabled="{Binding IsEndPlateEnabled, Mode=TwoWay}"
+                                  IsChecked="{Binding IsEndPlateChecked, Mode=TwoWay}" />
+                        <TextBox Text="{Binding EndPlatePrice}"
+                                 Style="{StaticResource CommonBoxStyle}"
+                                 DockPanel.Dock="Right"
+                                 Margin="20,0,40,0"
+                                 IsReadOnly="True"
+                                 Visibility="{Binding IsEndPlatePriceVisible}"/>
+                        <TextBlock  Text="{loc:Loc Key=Price}"
+                                    Style="{StaticResource CommonTextBlockStyle}"
+                                    DockPanel.Dock="Right"
+                                    Visibility="{Binding IsEndPlatePriceVisible}" />
+                    </DockPanel>
+                    <!-- Total Price -->
+                    <TextBlock Text="{loc:Loc Key=Total}"
+                               Grid.Row="5"
+                               Grid.Column="0"
+                               Style="{StaticResource TopicTextBlockStyle}" />
+                    <DockPanel LastChildFill="False"
+                               Grid.Row="5"
+                               Grid.Column="1"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc Key=Customer}"
+                                   Style="{StaticResource CommonTextBlockStyle}" />
+                        <ComboBox  ItemsSource="{Binding CustomerList}"
+                                   SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"
+                                   Style="{StaticResource CommonBoxStyle}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayNames, Converter={StaticResource TranslationDtoConverter}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock Text="{loc:Loc Key=Discount}"
+                                   Style="{StaticResource CommonTextBlockStyle}" />
+                        <TextBox Text="{Binding CustomerDiscount}"
+                                 Style="{StaticResource CommonBoxStyle}"
+                                 IsReadOnly="True" />
+                        <StackPanel Orientation="Vertical"
+                                    DockPanel.Dock="Right"
+                                    Margin="20,0,40,0">
+                            <DockPanel LastChildFill="False">
+                                <TextBox Text="{Binding TotalPriceBeforeDiscount}"
+                                         Style="{StaticResource CommonBoxStyle}"
+                                         IsReadOnly="True"
+                                         DockPanel.Dock="Right" />
+                                <TextBlock Text="{loc:Loc Key=TotalPriceBeforeDiscount}"
+                                           Style="{StaticResource CommonTextBlockStyle}"
+                                           DockPanel.Dock="Right" />
+
+                            </DockPanel>
+                            <DockPanel LastChildFill="False"
+                                       Margin="0,15,0,0">
+                                <TextBox Text="{Binding TotalPrice}"
+                                         Style="{StaticResource CommonBoxStyle}"
+                                         IsReadOnly="True"
+                                         DockPanel.Dock="Right" />
+                                <TextBlock Text="{loc:Loc Key=TotalPrice}"
+                                           Style="{StaticResource CommonTextBlockStyle}"
+                                           DockPanel.Dock="Right" />
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
+                    <!-- Note -->
+                    <TextBlock Text="{loc:Loc Key=Note}"
+                               Grid.Row="6"
+                               Grid.Column="0"
+                               Style="{StaticResource TopicTextBlockStyle}" />
+                    <DockPanel LastChildFill="False"
+                               Grid.Row="6"
+                               Grid.Column="1"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Center">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{loc:Loc Key=Note}"
+                                           Style="{StaticResource CommonTextBlockStyle}" />
+                                <TextBox Text="{Binding Note}" Style="{StaticResource CommonBoxStyle}"
+                                         Width="390" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0,15,0,0">
+                                <TextBlock Text="{loc:Loc Key=Operator}"
+                                           Style="{StaticResource CommonTextBlockStyle}" />
+                                <ComboBox  ItemsSource="{Binding OperatorList}"
+                                           SelectedItem="{Binding SelectedOperator, Mode=TwoWay}"
+                                           DisplayMemberPath="DisplayName"
+                                           Style="{StaticResource CommonBoxStyle}" />
+                                <TextBlock Text="{loc:Loc Key=Operand}"
+                                           Style="{StaticResource CommonTextBlockStyle}" />
+                                <TextBox Text="{Binding Operand}"
+                                         Style="{StaticResource CommonInputControlStyle}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <TextBox Text="{Binding FinalPrice}"
+                                 Style="{StaticResource CommonBoxStyle}"
+                                 IsReadOnly="True"
+                                 DockPanel.Dock="Right"
+                                 Margin="20,0,40,0" />
+                        <TextBlock Text="{loc:Loc Key=FinalPrice}"
+                                   Style="{StaticResource CommonTextBlockStyle}"
+                                   DockPanel.Dock="Right" />
+                    </DockPanel>
+                    <!-- Output Button -->
+                    <Grid Grid.Row="7"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          Width="192">
+                        <Button Content="{Binding LeftButtonText}"
+                                Height="30"
+                                Width="80"
+                                FontSize="14"
+                                FontWeight="Black"
+                                Margin="0,0,0,0"
+                                HorizontalAlignment="Left"
+                                Command="{Binding LeftButtonCommand}" />
+                        <Button Content="{Binding RightButtonText}"
+                                Height="30"
+                                Width="80"
+                                FontSize="14"
+                                FontWeight="Black"
+                                Margin="0,0,0,0"
+                                HorizontalAlignment="Right"
+                                Command="{Binding RightButtonCommand}" />
+                    </Grid>
+                </Grid>
+            </temp:QuotationViewTemplate.Sheet>
+
+            <temp:QuotationViewTemplate.GridContent>
+                
+                <DataGrid ItemsSource="{Binding WaterMeterViewList}"
+                          AutoGenerateColumns="False"
+                          ScrollViewer.CanContentScroll="True"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                          IsReadOnly="True">
+
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="✓"
+                                                Width="30">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="{loc:Loc Key=Time}"
+                                                Binding="{Binding Date}"
+                                                Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=Employee}"
+                                            Binding="{Binding Employee}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=Pipe|Diameter, ForceStatic=True}"
+                                            Binding="{Binding PipeDiameter}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=Pipe|Thickness, ForceStatic=True}"
+                                            Binding="{Binding PipeThickness}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=Pipe|UnitPrice, ForceStatic=True}"
+                                            Binding="{Binding PipeUnitPrice}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=Pipe|Length, ForceStatic=True}"
+                                            Binding="{Binding PipeLength}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=Pipe|Price, ForceStatic=True}"
+                                            Binding="{Binding PipePrice}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=PipeTop}"
+                                            Binding="{Binding PipeTopDisplayNames, Converter={StaticResource TranslationDtoConverter}}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=PipeTop|UnitPrice, ForceStatic=True}"
+                                            Binding="{Binding PipeTopUnitPrice}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=PipeTop|Quantity, ForceStatic=True}"
+                                            Binding="{Binding PipeTopQuantity}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=PipeTop|Price, ForceStatic=True}"
+                                            Binding="{Binding PipeTopPrice}"
+                                            Width="Auto" />
+                        <DataGridTemplateColumn Header="{loc:Loc Key=Teeth|Count, ForceStatic=True}"
+                                                Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Hyperlink Command="{Binding OpenTeethPopupCommand}">
+                                            <TextBlock Text="{Binding TeethTypeCount}"
+                                                        Foreground="Blue"
+                                                        TextDecorations="Underline" />
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="{loc:Loc Key=EndPlate}"
+                                            Binding="{Binding EndPlate}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=SealingPlate|Price, ForceStatic=True}"
+                                            Binding="{Binding EndPlatePrice}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=Customer|Type, ForceStatic=True}"
+                                            Binding="{Binding Customer, Converter={StaticResource TranslationDtoConverter}}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=Discount}"
+                                            Binding="{Binding CustomerDiscount}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=TotalPriceBeforeDiscount}"
+                                            Binding="{Binding TotalPriceBeforeDiscount}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=TotalPrice}"
+                                                Binding="{Binding TotalPrice}"
+                                                Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=Note}"
+                                            Binding="{Binding Note}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=Operator}"
+                                            Binding="{Binding Operator}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=Operand}"
+                                            Binding="{Binding Operand}"
+                                            Width="Auto" />
+                        <DataGridTextColumn Header="{loc:Loc Key=FinalPrice}"
+                                            Binding="{Binding FinalPrice}"
+                                            Width="Auto" />
+                        
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+            </temp:QuotationViewTemplate.GridContent>
+              
+
+            </temp:QuotationViewTemplate>
+
+        </Grid>
+</UserControl>

@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="QuotationSystem2.PresentationLayer.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:QuotationSystem2.PresentationLayer.Views"
+             xmlns:loc="clr-namespace:QuotationSystem2.PresentationLayer.Services.Localization"
+             mc:Ignorable="d"
+             Margin="0,80,0,0">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
+                  Style="{StaticResource ScrollViewerStyle}">
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center">
+            <!-- Title -->
+            <TextBlock Text="{loc:Loc Key=CompanyName, ForceStatic=True}"
+                       FontSize="50"
+                       FontWeight="Black"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top" />
+            <TextBlock Text="{loc:Loc Key=QuotationSystem, ForceStatic=True}"
+                       FontSize="50"
+                       FontWeight="Black"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       Margin="0,30,0,0" />
+
+            <!-- User Info -->
+            <Grid HorizontalAlignment="Center"
+                  Margin="0,50,0,0">
+                <Grid.RowDefinitions>
+                    <!-- Account/Parrword -->
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <!-- title/:/input -->
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <!-- Account Row -->
+                <TextBlock Text="{loc:Loc Key=User, ForceStatic=True}"
+                           Grid.Column="0"
+                           Grid.Row="0"
+                           FontSize="18"
+                           VerticalAlignment="Center" />
+                <TextBlock Text="："
+                           Grid.Column="1"
+                           Grid.Row="0"
+                           FontSize="18"
+                           VerticalAlignment="Center" />
+                <TextBlock Text="{Binding User.Name}"
+                           Grid.Column="2"
+                           Grid.Row="0"
+                           FontSize="18"
+                           Width="200"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left" />
+                <!-- Password Row -->
+                <TextBlock Text="{loc:Loc Key=Account, ForceStatic=True}"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           FontSize="18"
+                           VerticalAlignment="Center" />
+                <TextBlock Text="："
+                           Grid.Column="1"
+                           Grid.Row="2"
+                           FontSize="18"
+                           VerticalAlignment="Center" />
+                <TextBlock Text="{Binding User.Role.DisplayNames, Converter={StaticResource TranslationDtoConverter}}"
+                           Grid.Column="2"
+                           Grid.Row="2"
+                           FontSize="18"
+                           Width="200"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left" />
+            </Grid>
+
+            <!-- Page Navigation Button -->
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,80,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top">
+                <Button Content="{loc:Loc Key=WaterMeter, ForceStatic=True}"
+                        Command="{Binding NavigateToViewCommand}"
+                        CommandParameter="WaterMeterQuotation"
+                        FontSize="30"
+                        Padding="15" />
+                <Button Content="{loc:Loc Key=SealingPlate, ForceStatic=True}"
+                        Command="{Binding NavigateToViewCommand}"
+                        CommandParameter="SealingPlateQuotation"
+                        FontSize="30"
+                        Padding="15"
+                        Margin="40,0,0,0" />
+                <Button Content="{loc:Loc Key=SheerStud, ForceStatic=True}"
+                        Command="{Binding NavigateToViewCommand}"
+                        CommandParameter="SheerStudQuotation"
+                        FontSize="30"
+                        Padding="15"
+                        Margin="40,0,0,0" />
+                <Button Content="{loc:Loc Key=PriceTable, ForceStatic=True}"
+                        Command="{Binding NavigateToViewCommand}"
+                        CommandParameter="PriceTable"
+                        FontSize="30"
+                        Padding="15"
+                        Margin="40,0,0,0" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

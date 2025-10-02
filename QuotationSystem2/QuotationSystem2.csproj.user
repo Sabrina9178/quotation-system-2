@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="PresentationLayer\ChangePasswordWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\ErrorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\Templates\QuotationViewTemplate.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\Views\AccountView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\Views\CreateOrEditUserWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\Views\HomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\Views\LoginView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\Views\PriceTableView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\Views\SealingPlateQuotationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\Views\SheerStudQuotationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\Views\WaterMeterQuotationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\Views\WaterMeterTeethPopup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PresentationLayer\ChangePasswordWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\ErrorWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\Views\AccountView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\Views\CreateOrEditUserWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\Templates\QuotationViewTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\Utilities\DataTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\Views\PriceTableView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\Views\SealingPlateQuotationView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\Views\SheerStudQuotationView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresentationLayer\Views\WaterMeterQuotationView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Style\Button.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Style\ScrollViewer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Style\Text.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

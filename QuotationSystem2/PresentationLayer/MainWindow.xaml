@@ -1,0 +1,100 @@
+﻿<Window x:Class="QuotationSystem2.PresentationLayer.MainWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:local="clr-namespace:QuotationSystem2.PresentationLayer"
+       xmlns:loc="clr-namespace:QuotationSystem2.PresentationLayer.Services.Localization"
+       mc:Ignorable="d"
+       Title="MainWindow"
+        WindowState="Maximized"
+        MinHeight="600"
+        MinWidth="1000"
+        Left="0"
+        Top="0">
+
+   <Window.Resources>
+        <Style x:Key="CustomMenuItemStyle" TargetType="MenuItem">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Grid>
+                            <Border Name="Border" Background="{TemplateBinding Background}" CornerRadius="4">
+                                <ContentPresenter 
+                                    ContentSource="Header"
+                                    Margin="{TemplateBinding Padding}" 
+                                    VerticalAlignment="Center"
+                                    RecognizesAccessKey="True"/>
+                            </Border>
+                            <Popup Name="Popup" IsOpen="{TemplateBinding IsSubmenuOpen}" Placement="Bottom" StaysOpen="False" AllowsTransparency="True">
+                                <Border Background="#f7f7f7" CornerRadius="5">
+                                    <StackPanel>
+                                        <ItemsPresenter/>
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#FFDDDDDD"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Menu Grid.Row="0" Padding="6" VerticalAlignment="Top" Visibility="{Binding MenuVisibility}">
+            <MenuItem Header="{loc:Loc Key=CompanyName}" 
+                      Command="{Binding NavigateToViewCommand}" CommandParameter="Home"
+                      FontSize="20" FontWeight="Black"  Style="{StaticResource CustomMenuItemStyle}"/>
+            <MenuItem Header="{loc:Loc Key=Home}" Style="{StaticResource CustomMenuItemStyle}"
+                      Command="{Binding NavigateToViewCommand}" CommandParameter="Home"/>
+            <MenuItem Header="{loc:Loc Key=Account}" Style="{StaticResource CustomMenuItemStyle}"
+                      Command="{Binding NavigateToViewCommand}" CommandParameter="Account"/>
+            <MenuItem Header="{loc:Loc Key=Quotation}" Style="{StaticResource CustomMenuItemStyle}">
+                <MenuItem Header="{loc:Loc Key=WaterMeter}" Padding="3"
+                          Command="{Binding NavigateToViewCommand}" CommandParameter="WaterMeterQuotation"/>
+                <MenuItem Header="{loc:Loc Key=SealingPlate}" Padding="3"
+                          Command="{Binding NavigateToViewCommand}" CommandParameter="SealingPlateQuotation"/>
+                <MenuItem Header="{loc:Loc Key=SheerStud}" Padding="3"
+                          Command="{Binding NavigateToViewCommand}" CommandParameter="SheerStudQuotation"/>
+            </MenuItem>
+            <MenuItem Header="{loc:Loc Key=PriceTable}" Style="{StaticResource CustomMenuItemStyle}"
+                      Command="{Binding NavigateToViewCommand}" CommandParameter="PriceTable"/>
+            <MenuItem Header="{loc:Loc Key=Language}" Style="{StaticResource CustomMenuItemStyle}">
+                <MenuItem Header="{loc:Loc Key=Chinese}" Padding="3"
+                  Command="{Binding SetLanguageCommand}"
+                  CommandParameter="zh-TW"/>
+                <MenuItem Header="{loc:Loc Key=English}" Padding="3"
+                  Command="{Binding SetLanguageCommand}"
+                  CommandParameter="en-US"/>
+            </MenuItem>
+        </Menu>
+
+        <ContentControl x:Name="Pages"
+                        Grid.Row="1"
+                        Content="{Binding CurrentView}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Margin="0" />
+    </Grid>
+    
+    
+</Window>
