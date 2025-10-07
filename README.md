@@ -1,64 +1,86 @@
-# QuotationSystem2
-A WPF-based desktop quotation system designed to minimize manual errors and improve workflow efficiency. 
+# Plumbing Store Quotation System
+A **WPF-based desktop quotation system** designed to minimize manual errors and improve workflow efficiency. 
 
-Built with .NET Core, Entity Framework Core, and MS SQL Server, the application follows Clean Architecture with an MVVM pattern, incorporating layered design principles and localization support for multi-language use.
+Built with **.NET Core**, **Entity Framework Core**, and **MS SQL Server**, the application follows **Clean Architecture** with an **MVVM pattern**, incorporating **layered design principles** and localization support for multi-language use.
 
 ## Features
-- **Role-based access**: Separate permissions for administrators and standard users (employees).
+- **Role-based access**: Separate permissions for **administrators** and **standard users** (employees).
   <p align="left">
   <img src="Resources/Login.gif" 
       width="800">
   </p>
-  <p align="center" >
+  
+  - Admin has access to **edit, create, and delete user**.
+    <p align="center" >
     <table>
       <tr>
         <td>
           <figure>
             <img src="Resources/AccountManagement_Admin.jpg" width="500">
             <br>
-            <figcaption align="center">Admin has access to edit, create, and delete user.</figcaption>
+            <figurecaption>Admin</figurecaption>
           </figure>
         </td>
         <td>
           <figure>
             <img src="Resources/AccountManagement_User.jpg" width="500">
             <br>
-            <figcaption align="center">User has no access.</figcaption>
-          </figure>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <figure>
-            <img src="Resources/Quotation_Admin.jpg" width="500">
-            <br>
-            <figcaption align="center">Admin has access to edit, delete, and export records.</figcaption>
-          </figure>
-        </td>
-        <td>
-          <figure>
-            <img src="Resources/Quotation_User.jpg" width="500">
-            <br>
-            <figcaption align="center">User can only export records.</figcaption>
+            <figurecaption>User</figurecaption>
           </figure>
         </td>
       </tr>
     </table>
   </p>
   
-- **Quotation operation**: Generate quotations by entering input values. Combobox options and prices update dynamically based on selected products and previous choices.
+  - Admin has access to **edit, delete, and export records**.
+    <p align="center" >
+    <table>
+      <tr>
+        <td>
+          <figure>
+            <img src="Resources/Quotation_Admin.jpg" width="500">
+            <br>
+            <figurecaption>Admin</figurecaption>
+          </figure>
+        </td>
+        <td>
+          <figure>
+            <img src="Resources/Quotation_User.jpg" width="500">
+            <br>
+            <figurecaption>User</figurecaption>
+          </figure>
+        </td>
+      </tr>
+    </table>
+  </p>
+  
+  
+- **Quotation operation**:
+  - Generate quotations by entering input values.
+  - Options and prices **update dynamically** based on selected products and previous choices.
   <p align="left">
   <img src="Resources/QuotationOperation_speedx2.gif" 
       width="800">
   </p>
-- **Quotation history**: View, edit, delete, or export past quotation records. Editing and deletion are restricted to administrators.
-  <p align="left">
-  <img src="Resources/QuotationDeleteAndExport_speedx1.8.gif" 
-      width="800">
-  </p>
+- **Quotation history**:
+  - **Editing and deletion** on past quotation records are restricted to administrators.
+    <p align="left">
+    <img src="Resources/QuotationEditing_speedx1.5.gif" 
+        width="800">
+    </p>
+
+  - **View and export** past quotation records are available to all users.
+    <p align="left">
+    <img src="Resources/QuotationDeleteAndExport_speedx1.8.gif" 
+        width="800">
+    </p>
     
 - **Price table management** (in progress): Allows administrators to update product options and pricing.
-- **Localization support**: Provides a multilingual interface, currently supporting English (EN-US) and Traditional Chinese (ZH-TW).
+- **Localization support**: Provides a multilingual interface, currently supporting **English (EN-US)** and **Traditional Chinese (ZH-TW)**.
+  <p align="left">
+  <img src="Resources/Localization_speedx1.3.gif" 
+      width="800">
+  </p>
   
 
 ## Technical Stack
